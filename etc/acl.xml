@@ -3,9 +3,9 @@
 /**
  * Created by Q-Solutions Studio
  *
- * @category    Nanobots
- * @package     Nanobots_CloudFlareCache
- * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com>
+ * @category    Qoliber
+ * @package     Qoliber_CloudFlareCache
+ * @author      Jakub Winkler <jwinkler@qoliber.com>
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
@@ -13,7 +13,7 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::system">
-                    <resource id="Nanobots_CloudFlareCache::config" title="Nanobots CloudFlare Cache Configuration" translate="title" sortOrder="5" />
+                    <resource id="Qoliber_CloudFlareCache::config" title="Qoliber CloudFlare Cache Configuration" translate="title" sortOrder="5" />
                 </resource>
             </resource>
         </resources>

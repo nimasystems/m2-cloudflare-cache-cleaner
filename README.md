@@ -6,10 +6,10 @@
 
 Simple Magento 2 module that allows to clear CloudFlare cache from **CLI**
 
-Installation (in your Magento 2 directory):\
-**THIS PACKAGE REQUIRES COMPOSER 2.x** 
+Installation (in your Magento 2 directory):
+**THIS PACKAGE REQUIRES COMPOSER 2.x**
 ```bash
-composer require enanobots/m2-cloudflare-cache-cleaner
+composer require qoliber/m2-cloudflare-cache-cleaner
 ```
 
 And run upgrade command:
@@ -19,27 +19,31 @@ php bin/magento setup:upgrade
 
 Module should work out-of-the box
 
-### Tested on:
+### Tested on
+
 - Magento 2.4.2 Open Source
 - Magento 2.4.3 Open Source
 - Magento 2.4.4 Open Source
 - Magento 2.4.5 Open Source
 
 ### How to use this module
+
 Simply run `CLI` command:
 
 ```
-php bin/magento  nanobots:cloudflare:cache-clear [--request] [param list] 
+php bin/magento  qoliber:cloudflare:cache-clear [--request] [param list] 
 ```
 
-####  Examples:
+#### Examples
+
 ```
-php bin/magento  nanobots:cloudflare:cache-clear  --request=files https://www.store.com/ https://www.store.com/clear_this
-php bin/magento  nanobots:cloudflare:cache-clear  --request=tags tag1 tag2 tag3
-php bin/magento  nanobots:cloudflare:cache-clear  --request=hosts https://www.store.com/ 
+php bin/magento  qoliber:cloudflare:cache-clear  --request=files https://www.store.com/ https://www.store.com/clear_this
+php bin/magento  qoliber:cloudflare:cache-clear  --request=tags tag1 tag2 tag3
+php bin/magento  qoliber:cloudflare:cache-clear  --request=hosts https://www.store.com/ 
 ```
 
-Available requests:
+##### Available requests
+
 - `files` - clear CF cache by URLs 
 - `tags` - clear CF cache by tags
 - `hosts` - clears CF cache by hosts
@@ -47,6 +51,7 @@ Available requests:
 - `purge_everything` - clear entire CF cache associated to the specified ZONE
 
 ### Next update (coming soon... )
+
 - adding logging and output regarding errors / issues
 - adding ability to pass extra headers in the CLI
 - adding admin UI to allow clearing CF from admin panel

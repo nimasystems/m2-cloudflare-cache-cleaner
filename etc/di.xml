@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Created by Q-Solutions Studio
+ *
+ * @category    Qoliber
+ * @package     Qoliber_CloudFlareCache
+ * @author      Jakub Winkler <jwinkler@qoliber.com>
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Qoliber\CloudFlareCache\Api\Data\ConfigInterface"
+                type="Qoliber\CloudFlareCache\Model\Config"/>
+    <preference for="Qoliber\CloudFlareCache\Api\CloudFlare\CacheClientInterface"
+                type="Qoliber\CloudFlareCache\Model\CloudFlare\CacheClient"/>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="qoliber_cloudflare_cache" xsi:type="object">Qoliber\CloudFlareCache\Console\ClearCache</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

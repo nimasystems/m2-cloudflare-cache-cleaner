@@ -1,35 +1,29 @@
 {
-  "name": "enanobots/m2-cloudflare-cache-cleaner",
-  "type": "magento2-module",
-  "license": "OSL-3.0",
-  "version": "1.0.1.1",
+  "name": "qoliber/m2-cloudflare-cache-cleaner",
+  "version": "2.0.0",
+  "source": {
+    "type": "git",
+    "url": "git@github.com:qoliber/m2-cloudflare-cache-cleaner.git",
+    "reference": "main"
+  },
   "authors": [
     {
-      "email": "jwinkler@qsolutionsstudio.com",
-      "name": "Jakub Winkler"
-    },
-    {
-      "email": "nanobotsecommerce@gmail.com",
-      "name": "eCommerce Nanobots"
+      "name": "qoliber",
+      "email": "info@qoliber.com"
     }
   ],
-  "config": {
-    "sort-packages": true
-  },
-  "description": "Magento 2 CloudFlare Cache Cleaner",
-  "homepage": "https://github.com/enanobots/m2-cloudflare-cache-cleaner",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
+  "license": "MIT",
   "require": {
-    "php": ">=7.4",
-    "guzzlehttp/guzzle": "^6.0.0 || ^7.0.0"
+    "php": ">=8.1",
+    "guzzlehttp/guzzle": "^6.0.0 || ^7.0.0",
+    "qoliber/core": "*"
   },
   "autoload": {
     "files": [
-      "src/registration.php"
+      "registration.php"
     ],
     "psr-4": {
-      "Nanobots\\CloudFlareCache\\": "src/"
+      "Qoliber\\CloudFlareCache\\": ""
     }
   }
 }

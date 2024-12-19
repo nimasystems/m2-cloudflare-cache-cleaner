@@ -1,18 +1,19 @@
 <?php
 /**
- * Copyright © Q-Solutions Studio: eCommerce Nanobots. All rights reserved.
+ * Copyright © Qoliber. All rights reserved.
  *
- * @category    Nanobots
- * @package     Nanobots_CloudFlareCache
- * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com
+ * @category    Qoliber
+ * @package     Qoliber_CloudFlareCache
+ * @author      Jakub Winkler <jwinkler@qoliber.com
  */
 
-namespace Nanobots\CloudFlareCache\Model\CloudFlare;
+namespace Qoliber\CloudFlareCache\Model\CloudFlare;
 
 use GuzzleHttp\Client;
-use Nanobots\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
-use Nanobots\CloudFlareCache\Api\Data\ConfigInterface;
+use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
+use Qoliber\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
+use Qoliber\CloudFlareCache\Api\Data\ConfigInterface;
 
 class CacheClient implements CacheClientInterface
 {
@@ -31,35 +32,23 @@ class CacheClient implements CacheClientInterface
     /** @var string  */
     const HEADERS = 'headers';
 
-    /** @var Client  */
     protected Client $httpClient;
 
-    /** @var ConfigInterface  */
     protected ConfigInterface $config;
 
-    /** @var array  */
+    /** @var array<string, string> */
     protected array $extraHeaders = [];
 
-    /**
-     * @return array
-     */
     public function getExtraHeaders(): array
     {
         return $this->extraHeaders;
     }
 
-    /**
-     * @param array $extraHeaders
-     */
     public function setExtraHeaders(array $extraHeaders): void
     {
         $this->extraHeaders = $extraHeaders;
     }
 
-    /**
-     * @param ConfigInterface $config
-     * @param Client $httpClient
-     */
     public function __construct(
         ConfigInterface $config,
         Client $httpClient
@@ -71,13 +60,13 @@ class CacheClient implements CacheClientInterface
     /**
      * @inheritDoc
      */
-    public function clearCache(string $jsonData): \Psr\Http\Message\ResponseInterface
+    public function clearCache(string $jsonData): ResponseInterface
     {
         return $this->httpClient->post(
             $this->buildUrl(),
             [
-                \GuzzleHttp\RequestOptions::HEADERS => $this->buildHeaders(),
-                \GuzzleHttp\RequestOptions::JSON => $jsonData
+                RequestOptions::HEADERS => $this->buildHeaders(),
+                RequestOptions::JSON => (string) $jsonData
             ]
         );
     }
@@ -96,29 +85,25 @@ class CacheClient implements CacheClientInterface
     public function buildHeaders(): array
     {
         $headers['Content-Type'] = self::CONTENT_TYPE_APPLICATION_JSON;
-        switch ($this->config->getAuthType()) {
-            case self::AUTH_TYPE_XTYPE: {
-                $headers[] = sprintf(self::X_AUTH_EMAIL, $this->config->getXAuthEmail());
-                $headers[] = sprintf(self::X_AUTH_KEY, $this->config->getXAuthKey());
-                break;
-            }
-
-            case self::AUTH_TYPE_BEARER: {
-                $headers['Authorization'] = sprintf(self::AUTHORIZATION_BEARER, $this->config->getAuthBearer());
-                break;
-            }
+        if ($this->config->getAuthType() == self::AUTH_TYPE_XTYPE) {
+            $headers[self::X_AUTH_EMAIL] = sprintf(self::X_AUTH_EMAIL, $this->config->getXAuthEmail());
+            $headers[self::X_AUTH_KEY] = sprintf(self::X_AUTH_KEY, $this->config->getXAuthKey());
+        } elseif ($this->config->getAuthType() == self::AUTH_TYPE_BEARER) {
+            $headers['Authorization'] = sprintf(self::AUTHORIZATION_BEARER, $this->config->getAuthBearer());
         }
 
         return $headers;
     }
+
 
     /**
      * @inheritDoc
      */
     public function purgeCfCache(): ResponseInterface
     {
+        $json = json_encode(['purge_everything' => true]);
         return $this->clearCache(
-            json_encode(['purge_everything' => true])
+             is_string($json) ? $json : '{}'
         );
     }
 
@@ -167,13 +152,12 @@ class CacheClient implements CacheClientInterface
     }
 
     /**
-     * @param array $data
-     * @param string $arrayKey
-     * @return false|string
+     * @param array<string> $data
+     * @return string
      */
     public function prepareJSON(array $data, string $arrayKey)
     {
-        if ($extraHeaders = $this->getExtraHeaders()) {
+        if (($extraHeaders = $this->getExtraHeaders()) !== []) {
             $json = json_encode(
                 [
                     $arrayKey => $data,
@@ -186,6 +170,6 @@ class CacheClient implements CacheClientInterface
             ]);
         }
 
-        return $json;
+        return is_string($json) ? $json : '{}';
     }
 }

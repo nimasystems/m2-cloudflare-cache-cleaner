@@ -3,25 +3,22 @@
 /**
  * Created by Q-Solutions Studio
  *
- * @category    Nanobots
- * @package     Nanobots_CloudFlareCache
- * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com>
+ * @category    Qoliber
+ * @package     Qoliber_CloudFlareCache
+ * @author      Jakub Winkler <jwinkler@qoliber.com>
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="nanobots" translate="label" sortOrder="10">
-            <label>Nanobots</label>
-        </tab>
-        <section id="nanobots" sortOrder="500" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+        <section id="qoliber" sortOrder="500" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
             <label>Cloud Flare Cache</label>
-            <tab>nanobots</tab>
-            <resource>Nanobots_CloudFlareCache::config</resource>
+            <tab>qoliber</tab>
+            <resource>Qoliber_CloudFlareCache::config</resource>
             <group id="cloudflarecache" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                 <label>API Settings</label>
                 <field id="auth_type" type="select" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
                     <label>CloudFlare Authorization Type</label>
-                    <source_model>Nanobots\CloudFlareCache\Model\Config\Source\AuthType</source_model>
+                    <source_model>Qoliber\CloudFlareCache\Model\Config\Source\AuthType</source_model>
                 </field>
                 <field id="xauth_email" type="text" translate="label" sortOrder="20" showInStore="1" showInWebsite="1" showInDefault="1">
                     <label>XAuth Email Address</label>

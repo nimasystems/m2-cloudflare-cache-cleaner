@@ -1,15 +1,16 @@
 <?php
 /**
- * Copyright © Q-Solutions Studio: eCommerce Nanobots. All rights reserved.
+ * Copyright © Qoliber. All rights reserved.
  *
- * @category    Nanobots
- * @package     Nanobots_CloudFlareCache
- * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com
+ * @category    Qoliber
+ * @package     Qoliber_CloudFlareCache
+ * @author      Jakub Winkler <jwinkler@qoliber.com
  */
 
-namespace Nanobots\CloudFlareCache\Api\CloudFlare;
+namespace Qoliber\CloudFlareCache\Api\CloudFlare;
 
 use Psr\Http\Message\ResponseInterface;
+
 interface CacheClientInterface
 {
     /** @var string  */
@@ -22,58 +23,48 @@ interface CacheClientInterface
     public const AUTH_TYPE_BEARER = 1;
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getExtraHeaders(): array;
 
     /**
-     * @param array $extraHeaders
+     * @param array<string, string> $extraHeaders
      * @return void
      */
     public function setExtraHeaders(array $extraHeaders): void;
 
-    /**
-     * @return string
-     */
     public function buildUrl(): string;
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function buildHeaders(): array;
 
-    /**
-     * @param string $jsonData
-     * @return ResponseInterface
-     */
     public function clearCache(string $jsonData): ResponseInterface;
 
-    /**
-     * @return ResponseInterface
-     */
     public function purgeCfCache(): ResponseInterface;
 
     /**
-     * @param array $tags
-     * @return ResponseInterface;
+     * @param array<string> $tags
+     * @return ResponseInterface
      */
     public function clearCacheByTags(array $tags): ResponseInterface;
 
     /**
-     * @param array $files
-     * @return ResponseInterface;
+     * @param array<string> $files
+     * @return ResponseInterface
      */
     public function clearCfCacheByFiles(array $files): ResponseInterface;
 
     /**
-     * @param array $hosts
-     * @return ResponseInterface;
+     * @param array<string> $hosts
+     * @return ResponseInterface
      */
     public function clearCfCacheByHosts(array $hosts): ResponseInterface;
 
     /**
-     * @param array $prefixes
-     * @return ResponseInterface;
+     * @param array<string> $prefixes
+     * @return ResponseInterface
      */
     public function clearCfCacheByPrefixes(array $prefixes): ResponseInterface;
 }
