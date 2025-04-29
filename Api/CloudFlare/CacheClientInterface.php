@@ -13,13 +13,13 @@ use Psr\Http\Message\ResponseInterface;
 
 interface CacheClientInterface
 {
-    /** @var string  */
+    /** @var string */
     public const CLOUD_FLARE_API = 'https://api.cloudflare.com/client/v4/zones/%s/purge_cache';
 
-    /** @var int  */
+    /** @var int */
     public const AUTH_TYPE_XTYPE = 0;
 
-    /** @var int  */
+    /** @var int */
     public const AUTH_TYPE_BEARER = 1;
 
     /**

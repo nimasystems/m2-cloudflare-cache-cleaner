@@ -1,58 +1,71 @@
 <?php
 /**
- * Copyright © Qoliber. All rights reserved.
+ * Copyright © Q-Solutions Studio: eCommerce Nanobots. All rights reserved.
  *
- * @category    Qoliber
- * @package     Qoliber_CloudFlareCache
- * @author      Jakub Winkler <jwinkler@qoliber.com
+ * @category    Nanobots
+ * @package     Nanobots_CloudFlareCache
+ * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com
  */
 
-namespace Qoliber\CloudFlareCache\Model\CloudFlare;
+namespace Nanobots\CloudFlareCache\Model\CloudFlare;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use Nanobots\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
+use Nanobots\CloudFlareCache\Api\Data\ConfigInterface;
 use Psr\Http\Message\ResponseInterface;
-use Qoliber\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
-use Qoliber\CloudFlareCache\Api\Data\ConfigInterface;
 
 class CacheClient implements CacheClientInterface
 {
-    /** @var string  */
+    /** @var string */
     const CONTENT_TYPE_APPLICATION_JSON = 'application/json';
 
-    /** @var string  */
+    /** @var string */
     const X_AUTH_EMAIL = 'X-Auth-Email: %s';
 
-    /** @var string  */
+    /** @var string */
     const X_AUTH_KEY = 'X-Auth-Key: %s';
 
-    /** @var string  */
+    /** @var string */
     const AUTHORIZATION_BEARER = 'Bearer %s';
 
-    /** @var string  */
+    /** @var string */
     const HEADERS = 'headers';
 
+    /** @var Client */
     protected Client $httpClient;
 
+    /** @var ConfigInterface */
     protected ConfigInterface $config;
 
-    /** @var array<string, string> */
+    /** @var array */
     protected array $extraHeaders = [];
 
+    /**
+     * @return array
+     */
     public function getExtraHeaders(): array
     {
         return $this->extraHeaders;
     }
 
+    /**
+     * @param array $extraHeaders
+     */
     public function setExtraHeaders(array $extraHeaders): void
     {
         $this->extraHeaders = $extraHeaders;
     }
 
+    /**
+     * @param ConfigInterface $config
+     * @param Client $httpClient
+     */
     public function __construct(
         ConfigInterface $config,
-        Client $httpClient
-    ) {
+        Client          $httpClient
+    )
+    {
         $this->config = $config;
         $this->httpClient = $httpClient;
     }
@@ -66,7 +79,7 @@ class CacheClient implements CacheClientInterface
             $this->buildUrl(),
             [
                 RequestOptions::HEADERS => $this->buildHeaders(),
-                RequestOptions::JSON => (string) $jsonData
+                RequestOptions::JSON => $jsonData,
             ]
         );
     }
@@ -85,25 +98,31 @@ class CacheClient implements CacheClientInterface
     public function buildHeaders(): array
     {
         $headers['Content-Type'] = self::CONTENT_TYPE_APPLICATION_JSON;
-        if ($this->config->getAuthType() == self::AUTH_TYPE_XTYPE) {
-            $headers[self::X_AUTH_EMAIL] = sprintf(self::X_AUTH_EMAIL, $this->config->getXAuthEmail());
-            $headers[self::X_AUTH_KEY] = sprintf(self::X_AUTH_KEY, $this->config->getXAuthKey());
-        } elseif ($this->config->getAuthType() == self::AUTH_TYPE_BEARER) {
-            $headers['Authorization'] = sprintf(self::AUTHORIZATION_BEARER, $this->config->getAuthBearer());
+        switch ($this->config->getAuthType()) {
+            case self::AUTH_TYPE_XTYPE:
+            {
+                $headers[] = sprintf(self::X_AUTH_EMAIL, $this->config->getXAuthEmail());
+                $headers[] = sprintf(self::X_AUTH_KEY, $this->config->getXAuthKey());
+                break;
+            }
+
+            case self::AUTH_TYPE_BEARER:
+            {
+                $headers['Authorization'] = sprintf(self::AUTHORIZATION_BEARER, $this->config->getAuthBearer());
+                break;
+            }
         }
 
         return $headers;
     }
-
 
     /**
      * @inheritDoc
      */
     public function purgeCfCache(): ResponseInterface
     {
-        $json = json_encode(['purge_everything' => true]);
         return $this->clearCache(
-             is_string($json) ? $json : '{}'
+            json_encode(['purge_everything' => true])
         );
     }
 
@@ -152,24 +171,25 @@ class CacheClient implements CacheClientInterface
     }
 
     /**
-     * @param array<string> $data
-     * @return string
+     * @param array $data
+     * @param string $arrayKey
+     * @return false|string
      */
     public function prepareJSON(array $data, string $arrayKey)
     {
-        if (($extraHeaders = $this->getExtraHeaders()) !== []) {
+        if ($extraHeaders = $this->getExtraHeaders()) {
             $json = json_encode(
                 [
                     $arrayKey => $data,
-                    self::HEADERS => $extraHeaders
+                    self::HEADERS => $extraHeaders,
                 ]
             );
         } else {
             $json = json_encode([
-                $arrayKey => $data
+                $arrayKey => $data,
             ]);
         }
 
-        return is_string($json) ? $json : '{}';
+        return $json;
     }
 }

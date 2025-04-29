@@ -1,20 +1,18 @@
 {
-  "name": "qoliber/m2-cloudflare-cache-cleaner",
-  "version": "2.0.0",
-  "source": {
-    "type": "git",
-    "url": "git@github.com:qoliber/m2-cloudflare-cache-cleaner.git",
-    "reference": "main"
-  },
+  "name": "nimasystems/m2-cloudflare-cache-cleaner",
   "authors": [
     {
       "name": "qoliber",
       "email": "info@qoliber.com"
+    },
+    {
+      "name": "Martin Kovachev",
+      "email": "miracle@nimasystems.com"
     }
   ],
   "license": "MIT",
   "require": {
-    "php": ">=8.1",
+    "php": "~7.4",
     "guzzlehttp/guzzle": "^6.0.0 || ^7.0.0",
     "qoliber/core": "*"
   },
