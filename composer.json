@@ -1,5 +1,6 @@
 {
   "name": "nimasystems/m2-cloudflare-cache-cleaner",
+  "version": "2.0.0",
   "authors": [
     {
       "name": "qoliber",
