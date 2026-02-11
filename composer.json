@@ -1,28 +1,28 @@
 {
-  "name": "nimasystems/m2-cloudflare-cache-cleaner",
-  "version": "2.0.0",
-  "authors": [
-    {
-      "name": "qoliber",
-      "email": "info@qoliber.com"
-    },
-    {
-      "name": "Martin Kovachev",
-      "email": "miracle@nimasystems.com"
-    }
-  ],
-  "license": "MIT",
-  "require": {
-    "php": "~7.4",
-    "guzzlehttp/guzzle": "^6.0.0 || ^7.0.0",
-    "qoliber/core": "*"
-  },
-  "autoload": {
-    "files": [
-      "registration.php"
+    "name": "nimasystems/m2-cloudflare-cache-cleaner",
+    "version": "2.0.0",
+    "authors": [
+        {
+            "name": "qoliber",
+            "email": "info@qoliber.com"
+        },
+        {
+            "name": "Martin Kovachev",
+            "email": "miracle@nimasystems.com"
+        }
     ],
-    "psr-4": {
-      "Qoliber\\CloudFlareCache\\": ""
+    "license": "MIT",
+    "require": {
+        "php": ">=8.3",
+        "guzzlehttp/guzzle": "^6.0.0 || ^7.0.0",
+        "qoliber/core": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Qoliber\\CloudFlareCache\\": ""
+        }
     }
-  }
 }

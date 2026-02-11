@@ -42,7 +42,7 @@ class ClearCache extends Command
      */
     public function __construct(
         CacheClientInterface $cloudFlare,
-        string               $name = null
+        ?string               $name = null
     )
     {
         $this->cloudFlare = $cloudFlare;
