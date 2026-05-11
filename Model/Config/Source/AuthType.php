@@ -7,7 +7,7 @@
  * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com
  */
 
-namespace Nanobots\CloudFlareCache\Model\Config\Source;
+namespace Qoliber\CloudFlareCache\Model\Config\Source;
 
 class AuthType
 {

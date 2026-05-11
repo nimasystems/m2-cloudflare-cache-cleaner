@@ -7,12 +7,12 @@
  * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com
  */
 
-namespace Nanobots\CloudFlareCache\Model\CloudFlare;
+namespace Qoliber\CloudFlareCache\Model\CloudFlare;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use Nanobots\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
-use Nanobots\CloudFlareCache\Api\Data\ConfigInterface;
+use Qoliber\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
+use Qoliber\CloudFlareCache\Api\Data\ConfigInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class CacheClient implements CacheClientInterface

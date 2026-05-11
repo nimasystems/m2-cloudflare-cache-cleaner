@@ -14,8 +14,7 @@
     "license": "MIT",
     "require": {
         "php": ">=8.3",
-        "guzzlehttp/guzzle": "^6.0.0 || ^7.0.0",
-        "qoliber/core": "*"
+        "guzzlehttp/guzzle": "^6.0.0 || ^7.0.0"
     },
     "autoload": {
         "files": [

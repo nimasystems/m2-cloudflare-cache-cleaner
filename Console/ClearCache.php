@@ -7,10 +7,10 @@
  * @author      Jakub Winkler <jwinkler@qsolutionsstudio.com
  */
 
-namespace Nanobots\CloudFlareCache\Console;
+namespace Qoliber\CloudFlareCache\Console;
 
 use Exception;
-use Nanobots\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
+use Qoliber\CloudFlareCache\Api\CloudFlare\CacheClientInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

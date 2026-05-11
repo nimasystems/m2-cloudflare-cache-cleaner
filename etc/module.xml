@@ -10,9 +10,5 @@
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Qoliber_CloudFlareCache">
-        <sequence>
-            <module name="Qoliber_Core" />
-        </sequence>
-    </module>
+    <module name="Qoliber_CloudFlareCache"/>
 </config>
